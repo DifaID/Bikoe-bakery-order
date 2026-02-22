@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bikoe Bakery Order</title>
+<style>
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #ffe6cc, #fff5e6);
+}
+.container {
+  max-width: 720px;
+  margin: auto;
+  background: #fffdf7;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+h2 {text-align: center; color: #d35400; font-size: 26px; margin-bottom: 15px;}
+h3 {color: #e67e22; margin: 20px 0 10px; border-bottom: 2px solid #f5cba7; padding-bottom: 5px;}
+.menu-section {margin-top: 20px;}
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #fff3e0;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+.menu-item input[type="checkbox"] {transform: scale(1.3); margin-right: 10px;}
+.qty-wrapper {display: flex; flex-direction: column; align-items: flex-end;}
+.qty-wrapper span {font-size: 12px; margin-bottom: 2px; color: #555;}
+.menu-item input[type="number"] {
+  width: 60px; padding: 4px; font-size: 14px;
+  border-radius: 6px; border: 1px solid #ccc;
+}
+.address-box {margin-top: 20px; display: flex; flex-direction: column;}
+.address-box label {margin-bottom: 5px; font-weight: bold; color: #d35400;}
+.address-box input {padding: 10px; border-radius: 10px; border: 1px solid #ccc; font-size: 14px;}
+.note {margin-top: 20px; padding: 12px; background: #fff3e0; border: 1px solid #f5b041; border-radius: 10px; min-height: 80px; white-space: pre-line; font-weight: 500;}
+.btn {display: block; width: 100%; padding: 14px; background: #27ae60; color: white; border: none; border-radius: 12px; font-size: 17px; cursor: pointer; margin-top: 20px; transition: 0.3s;}
+.btn:hover {background: #1e8449;}
+.log-section {margin-top: 30px; background:#fff3e0; padding: 15px; border-radius:12px; border:1px solid #f5b041;}
+.log-item {background:#fff; margin-bottom:8px; padding:8px; border-radius:8px; display:flex; justify-content: space-between; align-items:center; font-size:14px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
+.log-item button {background:#e74c3c; color:#fff; border:none; border-radius:6px; padding:4px 8px; cursor:pointer; font-size:12px;}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Menu Makanan Bikoe Bakery</h2>
+
+  <div class="menu-section">
+    <h3>🍞 Roti</h3>
+    <div class="menu-item">
+      <label><input type="checkbox" class="menu-check" data-name="Roti Gandum (tawar)" data-price="35000">Roti Gandum (tawar) - 35K</label>
+      <div class="qty-wrapper"><span>(Jumlah)</span><input type="number" class="menu-qty" min="0" value="0" disabled></div>
+    </div>
+    <div class="menu-item">
+      <label><input type="checkbox" class="menu-check" data-name="Roti Toast (Beef)" data-price="22000">Roti Toast (Beef) - 22K</label>
+      <div class="qty-wrapper"><span>(Jumlah)</span><input type="number" class="menu-qty" min="0" value="0" disabled></div>
+    </div>
+    <div class="menu-item">
+      <label><input type="checkbox" class="menu-check" data-name="Roti Toast (Ayam)" data-price="20000">Roti Toast (Ayam) - 20K</label>
+      <div class="qty-wrapper"><span>(Jumlah)</span><input type="number" class="menu-qty" min="0" value="0" disabled></div>
+    </div>
+
+    <h3>🍕 Varian Topping Pizza 28-30cm</h3>
+    <div class="menu-item">
+      <label><input type="checkbox" class="menu-check" data-name="Pizza Sosis sapi" data-price="115000">Pizza Sosis sapi - 115K</label>
+      <div class="qty-wrapper"><span>(Jumlah)</span><input type="number" class="menu-qty" min="0" value="0" disabled></div>
+    </div>
+    <div class="menu-item">
+      <label><input type="checkbox" class="menu-check" data-name="Pizza Sosis ayam" data-price="100000">Pizza Sosis ayam - 100K</label>
+      <div class="qty-wrapper"><span>(Jumlah)</span><input type="number" class="menu-qty" min="0" value="0" disabled></div>
+    </div>
+
+    <h3>🍕 Varian Pizza Mini 8-10cm</h3>
+    <div class="menu-item">
+      <label><input type="checkbox" class="menu-check" data-name="Pizza Mini Sosis sapi" data-price="5000">Pizza Mini Sosis sapi - 5K</label>
+      <div class="qty-wrapper"><span>(Jumlah)</span><input type="number" class="menu-qty" min="0" value="0" disabled></div>
+    </div>
+
+    <h3>🚚 Biaya Jarak (optional)</h3>
+    <div class="menu-item">
+      <label>Masukkan jarak (km):</label>
+      <div class="qty-wrapper">
+        <span>(km)</span>
+        <input type="number" id="jarakInput" min="0" value="0">
+      </div>
+    </div>
+  </div>
+
+  <div class="address-box">
+    <label>Nama Customer (opsional):</label>
+    <input type="text" id="customerName" placeholder="Masukkan nama...">
+    <label>Silahkan isi kotak di bawah, mau diambil di tempat / di antar ke rumah:</label>
+    <input type="text" id="address" placeholder="Masukkan alamat / keterangan...">
+  </div>
+
+  <div class="note" id="note">Pesanan anda akan muncul di sini...</div>
+
+  <button class="btn" onclick="sendWhatsApp()">Pesanan Siap - Kirim ke WhatsApp</button>
+
+  <div class="log-section">
+    <h3>📜 Log Pesanan</h3>
+    <div id="log-list"></div>
+    <button class="btn" onclick="printLog()">Cetak Log</button>
+    <button class="btn" style="background:#e74c3c; margin-top:8px;" onclick="clearLog()">Hapus Semua Log</button>
+  </div>
+</div>
+
+<script>
+const checkboxes = document.querySelectorAll('.menu-check');
+const quantities = document.querySelectorAll('.menu-qty');
+const noteDiv = document.getElementById('note');
+const addressInput = document.getElementById('address');
+const customerInput = document.getElementById('customerName');
+const jarakInput = document.getElementById('jarakInput');
+const tarifPerKm = 3000; 
+const biayaTambahan = 8000; 
+const logList = document.getElementById('log-list');
+let logs = [];
+
+checkboxes.forEach((cb,i)=>{
+  cb.addEventListener('change', ()=>{
+    if(cb.checked){quantities[i].value=1; quantities[i].disabled=false;}
+    else{quantities[i].value=0; quantities[i].disabled=true;}
+    updateNote();
+  });
+});
+
+quantities.forEach(q=>q.addEventListener('input', updateNote));
+addressInput.addEventListener('input', updateNote);
+jarakInput.addEventListener('input', updateNote);
+customerInput.addEventListener('input', updateNote);
+
+function updateNote(){
+  let selected=[]; let total=0;
+  checkboxes.forEach((cb,i)=>{
+    if(cb.checked && parseInt(quantities[i].value)>0){
+      let qty=parseInt(quantities[i].value);
+      let price=parseInt(cb.dataset.price);
+      selected.push(`${cb.dataset.name} x${qty} = Rp${(qty*price).toLocaleString()}`);
+      total += qty*price;
+    }
+  });
+
+  const jarak = parseFloat(jarakInput.value) || 0;
+  let biayaJarak = 0;
+  if(jarak>0) biayaJarak = (jarak*tarifPerKm)+biayaTambahan;
+  if(biayaJarak>0){selected.push(`Biaya Jarak (${jarak} km + Rp${biayaTambahan.toLocaleString()}) = Rp${biayaJarak.toLocaleString()}`); total+=biayaJarak;}
+
+  const customerText = customerInput.value.trim() ? `Nama: ${customerInput.value.trim()}` : '';
+  const addressText = addressInput.value.trim() ? `Alamat/kwterangan: ${addressInput.value.trim()}` : '';
+  noteDiv.textContent = selected.join('\n') + (selected.length ? `\nTotal: Rp${total.toLocaleString()}\n${customerText}\n${addressText}` : 'Pesanan anda akan muncul di sini...');
+}
+
+function sendWhatsApp(){
+  let selectedItems=[]; let total=0;
+  checkboxes.forEach((cb,i)=>{
+    if(cb.checked && parseInt(quantities[i].value)>0){
+      let qty=parseInt(quantities[i].value);
+      let price=parseInt(cb.dataset.price);
+      selectedItems.push(`${cb.dataset.name} x${qty} = Rp${(qty*price).toLocaleString()}`);
+      total += qty*price;
+    }
+  });
+
+  const jarak = parseFloat(jarakInput.value)||0;
+  let biayaJarak = 0;
+  if(jarak>0) biayaJarak = (jarak*tarifPerKm)+biayaTambahan;
+  if(biayaJarak>0){selectedItems.push(`Biaya Jarak (${jarak} km + Rp${biayaTambahan.toLocaleString()}) = Rp${biayaJarak.toLocaleString()}`); total+=biayaJarak;}
+
+  const customerText = customerInput.value.trim() ? `Nama: ${customerInput.value.trim()}` : '';
+  const addressText = addressInput.value.trim() ? `/keterangan: ${addressInput.value.trim()}` : '';
+  if(selectedItems.length===0){alert('Silakan pilih menu terlebih dahulu!'); return;}
+  const message = `Halo, saya ingin memesan:\n${selectedItems.join('\n')}\nTotal: Rp${total.toLocaleString()}\n${customerText}\n${addressText}`;
+  const phone='6285753556390';
+  window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`,'_blank');
+
+  const logEntry = {items:[...selectedItems], total:total, customer:customerText, address:addressText, time:new Date().toLocaleString()};
+  logs.push(logEntry); renderLog();
+}
+
+function renderLog(){
+  logList.innerHTML='';
+  logs.forEach((log,i)=>{
+    const div=document.createElement('div');
+    div.className='log-item';
+    div.innerHTML = `<div>${log.time}<br>${log.items.join('<br>')}<br>Total: Rp${log.total.toLocaleString()}<br>${log.customer}<br>${log.address}</div>
+    <button onclick="deleteLog(${i})">Hapus</button>`;
+    logList.appendChild(div);
+  });
+}
+function deleteLog(index){logs.splice(index,1); renderLog();}
+function clearLog(){if(confirm('Hapus semua log?')){logs=[]; renderLog();}}
+function printLog(){
+  const printWindow = window.open('','','width=800,height=600');
+  printWindow.document.write('<pre>'+logs.map(l=>`${l.time}\n${l.items.join('\n')}\nTotal: Rp${l.total.toLocaleString()}\n${l.customer}\n${l.address}`).join('\n\n')+'</pre>');
+  printWindow.print();
+}
+
+updateNote();
+</script>
+
+</body>
+</html>
