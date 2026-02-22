@@ -45,9 +45,7 @@ h3 {color: #e67e22; margin: 20px 0 10px; border-bottom: 2px solid #f5cba7; paddi
 .note {margin-top: 20px; padding: 12px; background: #fff3e0; border: 1px solid #f5b041; border-radius: 10px; min-height: 80px; white-space: pre-line; font-weight: 500;}
 .btn {display: block; width: 100%; padding: 14px; background: #27ae60; color: white; border: none; border-radius: 12px; font-size: 17px; cursor: pointer; margin-top: 20px; transition: 0.3s;}
 .btn:hover {background: #1e8449;}
-.log-section {margin-top: 30px; background:#fff3e0; padding: 15px; border-radius:12px; border:1px solid #f5b041;}
-.log-item {background:#fff; margin-bottom:8px; padding:8px; border-radius:8px; display:flex; justify-content: space-between; align-items:center; font-size:14px; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
-.log-item button {background:#e74c3c; color:#fff; border:none; border-radius:6px; padding:4px 8px; cursor:pointer; font-size:12px;}
+;}
 </style>
 </head>
 <body>
@@ -106,13 +104,6 @@ h3 {color: #e67e22; margin: 20px 0 10px; border-bottom: 2px solid #f5cba7; paddi
   <div class="note" id="note">Pesanan anda akan muncul di sini...</div>
 
   <button class="btn" onclick="sendWhatsApp()">Pesanan Siap - Kirim ke WhatsApp</button>
-
-  <div class="log-section">
-    <h3>📜 Log Pesanan</h3>
-    <div id="log-list"></div>
-    <button class="btn" onclick="printLog()">Cetak Log</button>
-    <button class="btn" style="background:#e74c3c; margin-top:8px;" onclick="clearLog()">Hapus Semua Log</button>
-  </div>
 </div>
 
 <script>
@@ -124,8 +115,6 @@ const customerInput = document.getElementById('customerName');
 const jarakInput = document.getElementById('jarakInput');
 const tarifPerKm = 3000; 
 const biayaTambahan = 8000; 
-const logList = document.getElementById('log-list');
-let logs = [];
 
 checkboxes.forEach((cb,i)=>{
   cb.addEventListener('change', ()=>{
@@ -157,7 +146,7 @@ function updateNote(){
   if(biayaJarak>0){selected.push(`Biaya Jarak (${jarak} km + Rp${biayaTambahan.toLocaleString()}) = Rp${biayaJarak.toLocaleString()}`); total+=biayaJarak;}
 
   const customerText = customerInput.value.trim() ? `Nama: ${customerInput.value.trim()}` : '';
-  const addressText = addressInput.value.trim() ? `Alamat/kwterangan: ${addressInput.value.trim()}` : '';
+  const addressText = addressInput.value.trim() ? `Alamat/keterangan: ${addressInput.value.trim()}` : '';
   noteDiv.textContent = selected.join('\n') + (selected.length ? `\nTotal: Rp${total.toLocaleString()}\n${customerText}\n${addressText}` : 'Pesanan anda akan muncul di sini...');
 }
 
