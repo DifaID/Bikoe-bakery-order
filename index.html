@@ -194,7 +194,7 @@ function sendOrder(){
 // ===== ADMIN LOGIN & LOG =====
 function loginAdmin(){
   const pass = prompt('Password admin:');
-  if(pass==='KELUARGACEMARA'){
+  if(pass==='p'){
     document.getElementById('adminBox').style.display='block';
     const savedLogs = localStorage.getItem('logPesanan');
     if(savedLogs) logs = JSON.parse(savedLogs);
